@@ -1,0 +1,74 @@
+
+
+.certificate .div-tahrirlash-btns {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    /*margin-top: 10px;*/
+}
+
+
+.certificate .certificate-one-div {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.certificate .certificate-one-div:first-child {
+    margin-left: 0;
+}
+.certificate .certificate-one-div:last-child {
+    margin-right: 0;
+}
+
+.certificate .certificate-one-div .file-image {
+    width: 210px !important;
+    height: 250px !important;
+    border: 1px solid black;
+}
+
+.certificate .file-name i {
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.certificate .file-name {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.certificate .images-div {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 20px;
+}
+
+.certificate .div-btns {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+
+.certificate .images-div .btn-outline-primary {
+    padding: 5px 10px 0 8px;
+}
+.certificate .images-div .btn-outline-primary i {
+    font-size: 20px;
+}
+
+
+.certificate .certificate-one-div .div-btns {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.certificate .certificate-one-div .btn-danger,
+.certificate .certificate-one-div .btn-secondary {
+    width: 48%;
+}

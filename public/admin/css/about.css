@@ -1,0 +1,55 @@
+
+.about .about-one-div {
+    margin-left: 10px;
+    margin-right: 10px;
+    position: relative;
+}
+
+.about .about-one-div:first-child {
+    margin-left: 0;
+}
+.about .about-one-div:last-child {
+    margin-right: 0;
+}
+
+.about .about-one-div .file-image {
+    width: 200px !important;
+    height: 130px !important;
+    border: 1px solid black;
+}
+
+.div-btn-edit {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.about .images-div {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 20px;
+}
+
+.div-btns {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.about .about-one-div .btn-danger,
+.about .about-one-div .btn-secondary,
+.about .about-one-div .btn-block {
+    margin-top: 10px;
+}
+
+.about .about-one-div .btn-danger,
+.about .about-one-div .btn-secondary {
+    width: 45%;
+}
+
+/* about banner */
+.about-banner img {
+    width: 500px !important;
+}
