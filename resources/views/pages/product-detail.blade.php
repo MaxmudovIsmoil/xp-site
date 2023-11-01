@@ -1,34 +1,47 @@
 @extends('layouts.app')
 @section('title', 'Xprinter - Product detail')
 @section('content')
-    <section class="detail-section mt-5xl">
+    @include('components.global.banner')
+    <section class="detail-section mt-5">
         <div class="container">
-            @include('components.global.navlink')
+            <div class="d-flex justify-content-end mb-4 global-nav">
+                <div class="font-500 nav-url">
+                    <a href="/">Home</a>
+                    <i class="fa-solid fa-angle-right fz-12"></i>
+                    <a href="/product">Product</a>
+                    <i class="fa-solid fa-angle-right fz-12"></i>
+                    <span>{{ $product->model }}</span>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-6 col-xl-5 col-xxl-4">
                     <div class="xzoom-container">
-                        <img class="xzoom" id="xzoom-default" src="{{ asset('client/img/products/1.jpg') }}"
-                            xoriginal="{{ asset('client/img/products/1.jpg') }}" style="width: 400px" />
+                        <img class="xzoom" id="xzoom-default" src="{{ asset('file_uploaded/product/' . $product->photo) }}"
+                            xoriginal="{{ asset('file_uploaded/product/' . $product->photo) }}" style="width: 400px" />
                         <div class="xzoom-thumbs min_wrap">
                             <div class="swiper gallery-thumbs" id="detailSwiper">
                                 <div class="swiper-wrapper">
-                                    <a href="{{ asset('file_uploaded/product/' . $product->photo) }}" class="swiper-slide">
+                                    <a href="{{ asset('file_uploaded/product/' . $product->photo) }}" class="swiper-slide1">
                                         <img src="{{ asset('file_uploaded/product/' . $product->photo) }}"
-                                            xpreview="{{ asset('client/img/products/1.jpg') }}" class="xzoom-gallery"
+                                            xpreview="{{ asset('file_uploaded/product/' . $product->photo) }}" class="xzoom-gallery"
                                             alt="Photo" />
                                     </a>
-                                    @for ($i = 0; $i < 10; $i++)
-                                        <a href="{{ asset('client/img/products/1.jpg') }}" class="swiper-slide">
-                                            <img src="{{ asset('client/img/products/1.jpg') }}"
-                                                xpreview="{{ asset('client/img/products/1.jpg') }}"
-                                                class="xzoom-gallery" alt="">
-                                        </a>
-                                    @endfor
+
+                                    @isset($product_photos)
+                                        @foreach ($product_photos as $pp)
+                                            <a href="{{ asset('file_uploaded/product/' . $pp->photo) }}">
+                                                <img src="{{ asset('file_uploaded/product/' . $pp->photo) }}"
+                                                    xpreview="{{ asset('file_uploaded/product/' . $pp->photo) }}"
+                                                    class="xzoom-gallery" alt="Photo" />
+                                            </a>
+                                        @endforeach
+                                    @endisset
                                 </div>
-                                <div class="pagination-swiper d-flex justify-content-evenly">
-                                    <div class="fa-solid fa-chevron-left"></div>
-                                    <div class="fa-solid fa-chevron-right"></div>
-                                </div>
+{{--                                <div class="pagination-swiper d-flex justify-content-evenly">--}}
+{{--                                    <div class="fa-solid fa-chevron-left"></div>--}}
+{{--                                    <div class="fa-solid fa-chevron-right"></div>--}}
+{{--                                </div>--}}
                             </div>
 
                         </div>
@@ -44,11 +57,6 @@
                                     <dd class="suggest">{{ $pd->language[0]->value }}</dd>
                                 </dl>
                             @endforeach
-{{--                            <dl class="amount clearfix">--}}
-{{--                                <dt class="metatit">Place of Origin</dt>--}}
-{{--                                <dd class="suggest">China</dd>--}}
-{{--                            </dl>--}}
-
                             <div class="links">
                                 <a href=""><i class="fa-brands fa-instagram me-2"></i></a>
                                 <a href=""><i class="fa-brands fa-facebook me-2"></i></a>
@@ -68,41 +76,40 @@
                     <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8">
                         <div>
                             <p>
-                                <a class="btn btn-primary" data-bs-toggle="collapse" href="#detailInfoOne" role="button"
-                                    aria-expanded="false" aria-controls="detailInfoOne">
-                                    Product Overview
-                                </a>
+                                @if(isset($product_overviews) and $product_overviews->count() !== 0)
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#detailInfoOne" role="button"
+                                        aria-expanded="false" aria-controls="detailInfoOne">
+                                        Product Overview
+                                    </a>
+                                @endif
                                 <a class="btn btn-primary" data-bs-toggle="collapse" href="#detailInfoTwo" role="button"
                                     aria-expanded="false" aria-controls="detailInfoTwo">
                                     Product Specification
                                 </a>
-                                <a class="btn btn-primary" data-bs-toggle="collapse" href="#detailInfoThree" role="button"
-                                    aria-expanded="false" aria-controls="detailInfoThree">
-                                    Service and Support
-                                </a>
+                                @if(isset($product_service_supports) and $product_service_supports->count() !== 0)
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#detailInfoThree" role="button"
+                                        aria-expanded="false" aria-controls="detailInfoThree">
+                                        Service and Support
+                                    </a>
+                                @endif
                             </p>
                             <div class="collapse show" id="detailInfoOne">
-                                <div class="card card-body">
-                                    <h2> Product Overview</h2>
-                                    <div class="table-responsive mt-3">
-                                        <table width="100%" class="table table-bordered">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        ● Wall mount available&nbsp;
-                                                    </td>
-                                                    <td>
-                                                        ● 203 dpi resolution models
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td height="14">● Head-up sensor</td>
-                                                    <td>● Support QR CODE, PDF417 printing</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                @if(isset($product_overviews) and $product_overviews->count() !== 0)
+                                    <div class="card card-body">
+                                        <h2> Product Overview</h2>
+                                        <div class="table-responsive mt-3">
+                                            <table width="100%" class="table table-bordered">
+                                                <tbody>
+                                                @foreach($product_overviews as $k => $product_over)
+                                                    <tr>
+                                                         <td>● {{ $product_over->language[0]->name }}</td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                             </div>
                             <div class="collapse mt-3" id="detailInfoTwo">
                                 <div class="card card-body">
@@ -345,80 +352,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="collapse mt-3" id="detailInfoThree">
-                                <div class="card card-body">
-                                    <h2>Service and Support</h2>
-                                    <div class="row no-border mt-3">
-                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Q:What’s your main product line?</h5>
-                                                    <p class="card-text">A:Specialized in Receipt printers, Label Printers,
-                                                        Mobile
-                                                        Printers,
-                                                        Panel
-                                                        printers, Kiosk printer, Dot Matrix Printer , Bluetooth printers.
-                                                    </p>
+                            @if(isset($product_service_supports) and $product_service_supports->count() !== 0)
+                                <div class="collapse mt-3" id="detailInfoThree">
+                                    <div class="card card-body">
+                                        <h2>Service and Support</h2>
+                                        <div class="row no-border mt-3">
+                                            @foreach($product_service_supports as $pss)
+                                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">{{ $pss->language[0]->name }}</h5>
+                                                            <p class="card-text">{{ $pss->language[0]->description }}</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Q:What’s your main product line?</h5>
-                                                    <p class="card-text">A:Specialized in Receipt printers, Label Printers,
-                                                        Mobile
-                                                        Printers,
-                                                        Panel
-                                                        printers, Kiosk printer, Dot Matrix Printer , Bluetooth printers.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Q:What’s your main product line?</h5>
-                                                    <p class="card-text">A:Specialized in Receipt printers, Label Printers,
-                                                        Mobile
-                                                        Printers,
-                                                        Panel
-                                                        printers, Kiosk printer, Dot Matrix Printer , Bluetooth printers.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Q:What’s your main product line?</h5>
-                                                    <p class="card-text">A:Specialized in Receipt printers, Label Printers,
-                                                        Mobile
-                                                        Printers, Panel
-                                                        printers, Kiosk printer, Dot Matrix Printer , Bluetooth printers.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Q:What’s your main product line?</h5>
-                                                    <p class="card-text">A:Specialized in Receipt printers, Label Printers,
-                                                        Mobile
-                                                        Printers, Panel
-                                                        printers, Kiosk printer, Dot Matrix Printer , Bluetooth printers.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Q:What’s your main product line?</h5>
-                                                    <p class="card-text">A:Specialized in Receipt printers, Label Printers,
-                                                        Mobile
-                                                        Printers, Panel
-                                                        printers, Kiosk printer, Dot Matrix Printer , Bluetooth printers.
-                                                    </p>
-                                                </div>
-                                            </div>
+                                            @endforeach
+
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-none col-lg-4 col-xl-4 col-xxl-4 global-card">

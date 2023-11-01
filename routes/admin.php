@@ -9,8 +9,11 @@ use App\Http\Controllers\Admin\NewController;
 use App\Http\Controllers\Admin\Product\ProductCategoryController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\Product\ProductPhotoController;
+use App\Http\Controllers\Admin\Product\ProductAdditionController;
+use App\Http\Controllers\Admin\Product\ProductOverviewController;
+use App\Http\Controllers\Admin\Product\ProductSpecificationController;
+use App\Http\Controllers\Admin\Product\ProductServiceSupportController;
 use Illuminate\Support\Facades\Route;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -78,7 +81,33 @@ Route::group(['prefix'  => 'product'], function() {
     Route::put('/update/{product_id}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/{product_id}', [ProductController::class, 'destroy'])->name('product.destroy');
 
-    Route::post('/upload/{$id}', [ProductPhotoController::class, 'upload'])->name('product_photo.upload');
+
+    Route::get('/addition/{id}', [ProductAdditionController::class, 'index'])->name('product.addition');
+    Route::post('/photo/upload/{id}', [ProductPhotoController::class, 'upload'])->name('product_photo.upload');
+    Route::delete('/photo/destroy/{id}', [ProductPhotoController::class, 'destroy'])->name('product_photo.destroy');
+
+    // overviews
+    Route::group(['prefix'  => 'overview'], function() {
+        Route::post('/store', [ProductOverviewController::class, 'store'])->name('product_overview.store');
+        Route::post('/one/{id}', [ProductOverviewController::class, 'one'])->name('product_overview.one');
+        Route::post('/update/{id}', [ProductOverviewController::class, 'update'])->name('product_overview.update');
+        Route::delete('/delete/{id}', [ProductOverviewController::class, 'destroy'])->name('product_overview.destroy');
+    });
+
+    // Specification
+    Route::group(['prefix'  => 'specification'], function() {
+        Route::post('/store', [ProductSpecificationController::class, 'store'])->name('product_specification.store');
+        Route::post('/update/{id}', [ProductSpecificationController::class, 'update'])->name('product_specification.update');
+        Route::delete('/delete/{id}', [ProductSpecificationController::class, 'destroy'])->name('product_specification.destroy');
+    });
+
+    // Service and Support
+    Route::group(['prefix'  => 'service-support'], function() {
+        Route::post('/store', [ProductServiceSupportController::class, 'store'])->name('product_service_support.store');
+        Route::post('/one/{id}', [ProductServiceSupportController::class, 'one'])->name('product_service_support.one');
+        Route::post('/update/{id}', [ProductServiceSupportController::class, 'update'])->name('product_service_support.update');
+        Route::delete('/delete/{id}', [ProductServiceSupportController::class, 'destroy'])->name('product_service_support.destroy');
+    });
 });
 
 

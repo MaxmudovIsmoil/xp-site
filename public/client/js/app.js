@@ -53,6 +53,8 @@ let newsSlider = new Swiper(".newsSlider", {
     },
 });
 
+
+
 /*
     !TODO: When hovering over the image, write the information written in the alt in the h3
 */
@@ -282,3 +284,4 @@ if (localStorage.getItem('dark') == 'true') {
     $("#theme-toggle").html('<i class="fa-solid fa-moon"></i>');
     $("body").attr("data-theme", "light");
 }
+

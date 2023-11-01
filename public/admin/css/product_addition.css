@@ -1,0 +1,55 @@
+
+.back-btn i {
+    font-size: 30px;
+}
+.back-btn i:hover {
+    color: #1faa69;
+}
+.product_photo .product_photo-one-div {
+    margin-left: 10px;
+    margin-right: 10px;
+    position: relative;
+}
+
+.product_photo .product_photo-one-div:first-child {
+    margin-left: 0;
+}
+.product_photo .product_photo-one-div:last-child {
+    margin-right: 0;
+}
+
+.product_photo .product_photo-one-div .file-image {
+    width: 200px !important;
+    height: 150px !important;
+    border: 1px solid black;
+}
+
+.product_photo .file-name i {
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.product_photo .images-div {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 20px;
+}
+
+.product_photo .div-btns {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.product_photo .div_photo .btn-danger,
+.product_photo .div_photo .btn-secondary,
+.product_photo .div_photo .btn-block {
+    margin-top: 10px;
+}
+
+.product_photo .div_photo .btn-danger,
+.product_photo .div_photo .btn-secondary {
+    width: 48%;
+}

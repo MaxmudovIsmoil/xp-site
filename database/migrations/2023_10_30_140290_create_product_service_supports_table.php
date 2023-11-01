@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_overviews', function (Blueprint $table) {
+        Schema::create('product_service_supports', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id')->nullable();
-            $table->enum('status', [1, 0])->default("1"); // hide or show
             $table->timestamps();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
@@ -29,7 +28,7 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('product_overview_translations');
-        Schema::dropIfExists('product_overviews');
+        Schema::dropIfExists('product_service_support_translations');
+        Schema::dropIfExists('product_service_supports');
     }
 };

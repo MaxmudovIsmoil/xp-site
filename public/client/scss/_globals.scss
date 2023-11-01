@@ -24,6 +24,7 @@
 
 .global-pagination {
     .pagination {
+        justify-content: center!important;
         .active > .page-link {
             background-color: $color_7;
             border-color: $color_7;

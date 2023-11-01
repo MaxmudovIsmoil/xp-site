@@ -109,7 +109,7 @@
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link @if(Request::segment(2) == 'about') active @endif" href="{{ route('about.index') }}">
                 <svg class="c-sidebar-nav-icon">
-                    <use xlink:href="{{ asset('admin/icons/sprites/free.svg#cil-layers') }}"></use>
+                    <use xlink:href="{{ asset('admin/icons/sprites/free.svg#cil-font') }}"></use>
                 </svg> About
             </a>
         </li>
@@ -130,10 +130,18 @@
             </a>
         </li>
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link @if(Request::segment(2) == 'reports') active @endif" href="">
+            <a class="c-sidebar-nav-link @if(Request::segment(2) == 'reports') active @endif">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="{{ asset('admin/icons/sprites/free.svg#cil-window-maximize') }}"></use>
+                </svg> Drayverlar
+            </a>
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link @if(Request::segment(2) == 'reports') active @endif">
                 <svg class="c-sidebar-nav-icon">
                     <use xlink:href="{{ asset('admin/icons/sprites/free.svg#cil-bar-chart') }}"></use>
-                </svg> Statistika
+                </svg> Servislar
             </a>
         </li>
 

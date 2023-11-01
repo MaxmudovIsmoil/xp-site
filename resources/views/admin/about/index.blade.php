@@ -23,7 +23,7 @@
         <div class="card-body p-0 pt-1">
 
             <span>En:</span>
-            @isset($about->language[0])
+            @isset($about->language)
                 @if($about->language[0]->locale == 'en')
                     <div class="js_description_en_html js_html mb-0">{!! $about->language[0]->description !!}</div>
                 @endif

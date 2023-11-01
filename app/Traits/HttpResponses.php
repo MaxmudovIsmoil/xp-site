@@ -26,7 +26,7 @@ trait HttpResponses {
 
 
 
-    protected function error(?string $error, ?int $code = null)
+    protected function error(mixed $error, ?int $code = null): JsonResponse
     {
       return response()->json([
         'status'  => false,

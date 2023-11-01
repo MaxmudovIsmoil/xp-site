@@ -52,7 +52,7 @@ $(document).on('click', '.js_save_btn', function() {
         dataType: "JSON",
         data: data,
         success: (response) => {
-            // console.log('res', response);
+            console.log('res', response);
             if(response.status) {
                 save_done(data);
                 $(this).closest('.cancel_save_btn').addClass('d-none');
@@ -168,7 +168,7 @@ $(document).on('submit', '.js_image_form', function(e) {
             // console.log(response)
 
             if(!response.status) {
-                if(response.error == "required")
+                if(response.error === "required")
                     $('.js_image').addClass('is-invalid');
             }
 

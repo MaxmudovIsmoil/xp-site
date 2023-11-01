@@ -27,7 +27,7 @@ $(document).ready(function(){
             url: url,
             data: $(this).serialize(),
             success: (response) => {
-                // console.log('res', response);
+                console.log('res', response);
                 if(!response.status) {
                     deleteModal.find('.js_message').addClass('d-none')
                     deleteModal.find('.js_danger').html(response.errors)

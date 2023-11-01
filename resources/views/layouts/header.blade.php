@@ -20,7 +20,7 @@
                         href="{{ route('index') }}">Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link @if (Request::segment(1) === 'product') active @endif" href="{{ route('product') }}">Products</a>
+                    <a class="nav-link @if (Request::segment(1) === 'product' || Request::segment(1) === 'product-detail') active @endif" href="{{ route('product') }}">Products</a>
 
 {{--                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside">Products</a>--}}
 {{--                    <ul class="dropdown-menu">--}}

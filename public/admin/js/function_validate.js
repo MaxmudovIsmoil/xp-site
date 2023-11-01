@@ -129,6 +129,11 @@ $(document).ready(function() {
         $(this).siblings('.invalid-feedback').addClass('valid-feedback')
     })
 
+    $('.js_photo').on('change', function () {
+        $(this).removeClass('is-invalid')
+        $(this).siblings('.invalid-feedback').addClass('valid-feedback')
+    })
+
     $('.js_date').on('input', function () {
         $(this).removeClass('is-invalid')
         $(this).siblings('.invalid-feedback').addClass('valid-feedback')

@@ -147,6 +147,8 @@ body[data-theme=dark] .global-pagination .pagination .page-item .page-link {
   background: #000;
   color: #fff;
 }
+
+
 body[data-theme=dark] .form .form-label {
   color: #fff;
 }

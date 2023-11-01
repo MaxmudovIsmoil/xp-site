@@ -20,11 +20,6 @@ class AboutTranslation extends Model
     public $timestamps = false;
 
 
-    // for api controller
-    public static function insert(array $datas)
-    {
-    }
-
     public function files()
     {
         return $this->hasMany(AboutFile::class, 'about_id', 'about_id');

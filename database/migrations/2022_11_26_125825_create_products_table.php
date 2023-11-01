@@ -47,6 +47,9 @@ return new class extends Migration
         Schema::dropIfExists('product_specification_translations');
         Schema::dropIfExists('product_specifications');
 
+        Schema::dropIfExists('product_service_support_translations');
+        Schema::dropIfExists('product_service_supports');
+
         Schema::dropIfExists('products');
     }
 };

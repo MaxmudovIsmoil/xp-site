@@ -51,7 +51,7 @@
                                 </td>
                                 <td class="text-right">
                                     <div class="d-flex" style="float: right;">
-                                        <a href="" class="btn btn-info btn-sm mr-1">
+                                        <a href="{{ route('product.addition', $product->id) }}" class="btn btn-info btn-sm mr-1">
                                             <i class="fa-solid fa-plus"></i> Qo'shimchalar
                                         </a>
                                         <a href="{{ route('product.edit', ['category_id' => session('category_id'), 'product_id' => $product->id]) }}" class="btn btn-sm btn-primary mr-1" title="Edit">

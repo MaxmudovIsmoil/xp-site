@@ -23,7 +23,10 @@ class AboutController extends Controller
             ->orderBy('id', 'DESC')
             ->first();
 
-        return view('admin.about.index', compact('about'));
+
+        return view('admin.about.index',
+            compact('about')
+        );
     }
 
 
@@ -32,6 +35,8 @@ class AboutController extends Controller
         $request->validated($request->all());
 
         try {
+            // return response()->json(['res' => $request->all()]);
+
             DB::beginTransaction();
                 AboutTranslation::where(['about_id' => $id])->delete();
 

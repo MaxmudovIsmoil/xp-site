@@ -9,7 +9,7 @@ class About extends Model
 {
     use HasFactory;
 
-    public $table = 'abouts';
+//    public $table = 'abouts';
 
     public $fillable = [
         'image',
