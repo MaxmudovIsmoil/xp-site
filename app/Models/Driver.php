@@ -12,12 +12,14 @@ class Driver extends Model
     // public $table = 'drivers';
 
     public $fillable = [
-        'name_en',
-        'name_ru',
-        'name_uz',
         'system',
         'file',
     ];
 
     public $timestamps = true;
+
+    public function language()
+    {
+        return $this->hasMany(DriverTranslation::class, 'driver_id', 'id');
+    }
 }

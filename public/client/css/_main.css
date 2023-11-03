@@ -147,8 +147,6 @@ body[data-theme=dark] .global-pagination .pagination .page-item .page-link {
   background: #000;
   color: #fff;
 }
-
-
 body[data-theme=dark] .form .form-label {
   color: #fff;
 }
@@ -247,6 +245,9 @@ body[data-theme=dark] .pagination-swiper .fa-solid {
   padding: 7px;
 }
 
+.global-pagination .pagination {
+  justify-content: center !important;
+}
 .global-pagination .pagination .active > .page-link {
   background-color: #024d80;
   border-color: #024d80;
@@ -416,13 +417,13 @@ body[data-theme=dark] .pagination-swiper .fa-solid {
   transition: 0.3s ease-in-out;
   transform: rotate(360deg);
 }
+.navbar .nav-item .flags li a img {
+  height: 24px;
+  border-radius: 4px;
+  margin-right: 5px;
+}
 .navbar .nav-link {
   border-radius: 6px;
-}
-.navbar .nav-item .flags li a img {
-    height: 24px;
-    border-radius: 4px;
-    margin-right: 5px;
 }
 .navbar .navbar-nav .nav-link.active {
   padding: 8px 13px;
@@ -548,7 +549,7 @@ body[data-theme=dark] .pagination-swiper .fa-solid {
   border-radius: 12px;
   cursor: pointer;
   background: transparent;
-  transition: transform 0.5s, background 0.5s;
+  transition: transform 1s, background 1s;
 }
 .services-component .service i {
   font-size: 40px;
@@ -557,7 +558,8 @@ body[data-theme=dark] .pagination-swiper .fa-solid {
   transition: 0.3s ease-in-out;
 }
 .services-component .service:hover i {
-  transform: rotate(360deg);
+  transform: scale(1.25);
+  transition: transform 1s, background 1s;
 }
 .services-component .service h2 {
   font-weight: 600;
@@ -733,6 +735,10 @@ body[data-theme=dark] .pagination-swiper .fa-solid {
   transition: 0.3s ease-in-out;
 }
 .product-section .list-group .list-group-item a:hover {
+  background: #024d80;
+  color: #fff;
+}
+.product-section .list-group .list-group-item .active {
   background: #024d80;
   color: #fff;
 }
@@ -924,7 +930,9 @@ body[data-theme=dark] .pagination-swiper .fa-solid {
   cursor: pointer;
 }
 .drivers-section .card .view img {
-  max-width: 60%;
+  max-width: 50%;
+  padding-top: 10px;
+  padding-bottom: 10px;
   transition: 0.3s ease-in-out;
 }
 .drivers-section .card .view:hover img {

@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('drivers', function (Blueprint $table) {
             $table->id();
-            $table->enum('system', ['windows', 'linux', 'mac']); // linux, windows, mac;
-            $table->string('file')->default(NULL);
+            $table->enum('system', ['windows', 'linux', 'mac', 'android', 'application']);
+            $table->string('file')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

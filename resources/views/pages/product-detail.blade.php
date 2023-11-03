@@ -58,15 +58,26 @@
                                 </dl>
                             @endforeach
                             <div class="links">
-                                <a href=""><i class="fa-brands fa-instagram me-2"></i></a>
-                                <a href=""><i class="fa-brands fa-facebook me-2"></i></a>
-                                <a href=""><i class="fa-brands fa-twitter"></i></a>
+
+                                @if(env('TELEGRAM_LINK') !== '')
+                                    <a href="{{ env('TELEGRAM_LINK') }}"><i class="fa-brands fa-telegram me-2"></i></a>
+                                @endif
+                                @if(env('INSTAGRAM_LINK') !== '')
+                                    <a href="{{ env('INSTAGRAM_LINK') }}"><i class="fa-brands fa-instagram me-2"></i></a>
+                                @endif
+                                @if(env('FACEBOOK_LINK') !== '')
+                                    <a href="{{ env('FACEBOOK_LINK') }}"><i class="fa-brands fa-facebook"></i></a>
+                                @endif
                             </div>
 
                             <div>
-                                <a href="" class="btn btn-primary">INQUIRE ONLINE</a>
-                                <a href="" class="btn btn-primary">BROCHURES</a>
-                                <a href="" class="btn btn-primary">DRIVER</a>
+                                    @isset($product->pdf)
+                                        <a href="{{ asset('file_uploaded/product/' . $product->pdf) }}" target="_blank" class="btn btn-primary">BROCHURES</a>
+                                    @endisset
+
+                                    @if($product->product_driver->count() > 0)
+                                        <a href="{{ route('product-driver', [$product->id]) }}" class="btn btn-primary">DRIVER</a>
+                                    @endif
                             </div>
                         </div>
                     </div>

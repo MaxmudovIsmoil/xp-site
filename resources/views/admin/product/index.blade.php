@@ -34,8 +34,8 @@
                             <tr class="js_this_tr" data-id="{{ $product->id }}">
                                 <td class="text-center">{{ 1 + $loop->index }}</td>
                                 <td class="td-photo">
-                                    <a data-fancybox="gallery" href="{{ asset('/file_uploaded/product/' . $product->photo) }}">
-                                        <img src="{{ asset('/file_uploaded/product/' . $product->photo) }}" class="product-photo" alt="Image" />
+                                    <a data-fancybox="gallery" href="{{ asset('file_uploaded/product/' . $product->photo) }}">
+                                        <img src="{{ asset('file_uploaded/product/' . $product->photo) }}" class="product-photo" alt="Image" />
                                     </a>
                                 </td>
                                 <td>
@@ -47,7 +47,6 @@
                                     @else
                                         <i class="fa-regular fa-star"></i>
                                     @endif
-
                                 </td>
                                 <td class="text-right">
                                     <div class="d-flex" style="float: right;">

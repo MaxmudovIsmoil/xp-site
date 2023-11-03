@@ -1,14 +1,14 @@
-<section class="services-component mt-5xl">
+@if(isset($services) and $services->count() > 0)
+    <section class="services-component mt-5xl">
         <h1>Our Services</h1>
         <div class="row">
-            @for ($i = 0; $i < 8; $i++)
+            @foreach ($services as $service)
                 <div class="service">
-                    <i class="fas fa-laptop-code"></i>
-                    <h2>Developers</h2>
-                    <p>
-                        Good programmers are good programmers, no matter what special title they have
-                    </p>
+                    {!! $service->icon !!}
+                    <h2>{{ $service->language[0]->name }}</h2>
+                    <p>{{ $service->language[0]->description }}</p>
                 </div>
-            @endfor
+            @endforeach
         </div>
-</section>
+    </section>
+@endif

@@ -19,6 +19,10 @@
                 color: $color_2;
             }
         }
+        .list-group-item .active {
+            background: $color_7;
+            color: $color_2;
+        }
     }
 
     .right {
@@ -286,7 +290,9 @@
             cursor: pointer;
 
             img {
-                max-width: 60%;
+                max-width: 50%;
+                padding-top: 10px;
+                padding-bottom: 10px;
                 transition: $transition;
             }
 

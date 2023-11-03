@@ -1,8 +1,8 @@
 <div class="images-div">
     @foreach($product_photos as $pf)
         <div class="js_this_image_div product_photo-one-div">
-            <a data-fancybox="gallery" href="{{ asset('/file_uploaded/product/'. $pf->photo) }}">
-                <img src="{{ asset('/file_uploaded/product/'. $pf->photo) }}" class="file-image"
+            <a data-fancybox="gallery" href="{{ asset('file_uploaded/product/'. $pf->photo) }}">
+                <img src="{{ asset('file_uploaded/product/'. $pf->photo) }}" class="file-image"
                      alt="Image"/>
             </a>
 

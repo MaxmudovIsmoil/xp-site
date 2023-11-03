@@ -57,6 +57,11 @@ $(document).ready(function() {
         let number = form.find('.js_number')
         number.val('')
         number.removeClass('is-invalid')
+
+
+        let icon = form.find('.js_icon')
+        icon.val('')
+        icon.removeClass('is-invalid')
     })
 
     $('#add_file_modal button[data-dismiss="modal"]').click(function () {
@@ -145,6 +150,11 @@ $(document).ready(function() {
     })
 
     $('.js_image').on('change', function () {
+        $(this).removeClass('is-invalid')
+        $(this).siblings('.invalid-feedback').addClass('valid-feedback')
+    })
+
+    $('.js_icon').on('input', function () {
         $(this).removeClass('is-invalid')
         $(this).siblings('.invalid-feedback').addClass('valid-feedback')
     })

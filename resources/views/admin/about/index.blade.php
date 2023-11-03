@@ -66,7 +66,7 @@
                 <div class="d-flex justify-content-end position-relative">
                     <button class="btn btn-primary position-absolute" data-toggle="modal" data-target="#image_modal" >O'rniga Yuklash</button>
                 </div>
-                <img src="{{ asset('/file_uploaded/about/'.$about->image) }}" alt="about banner" />
+                <img src="{{ asset('file_uploaded/about/'.$about->image) }}" alt="about banner" />
             </div>
 
             <hr class="last-hr">
@@ -76,8 +76,8 @@
                     @foreach ($about->files as $file)
 
                     <div class="js_this_image_div about-one-div">
-                        <a data-fancybox="gallery" href="{{ asset('/file_uploaded/about/'.$file->file) }}">
-                            <img src="{{ asset('/file_uploaded/about/'.$file->file) }}" class="file-image" alt="Image" />
+                        <a data-fancybox="gallery" href="{{ asset('file_uploaded/about/'.$file->file) }}">
+                            <img src="{{ asset('file_uploaded/about/'.$file->file) }}" class="file-image" alt="Image" />
                         </a>
 
                         <div class="d-none div-btns">

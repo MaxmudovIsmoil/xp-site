@@ -31,6 +31,7 @@ Route::get('product/one/{locale?}/{id}', [ProductController::class, 'one'])->nam
 
 
 Route::get('product-detail/{id}', [ProductDetailController::class, 'index'])->name('product-detail');
+Route::get('product-driver/{id}', [ProductDetailController::class, 'driver'])->name('product-driver');
 
 
 Route::get('contact/{locale?}', [ContactController::class, 'index'])->name('contact');

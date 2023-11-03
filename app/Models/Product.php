@@ -31,4 +31,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductDetail::class, 'product_id', 'id');
     }
+
+    public function product_driver()
+    {
+        return $this->hasMany(ProductDriver::class, 'product_id', 'id');
+    }
 }

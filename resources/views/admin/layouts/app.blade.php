@@ -53,7 +53,7 @@
     </div>
     <ul class="c-sidebar-nav ps ps--active-y">
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link @if(Request::segment(2) == 'dashboard') active @endif" href="{{ route('admin.dashboard') }}">
+            <a class="c-sidebar-nav-link @if(Request::segment(2) == 'dashboard') active @endif" href="{{ route('dashboard') }}">
                 <svg class="c-sidebar-nav-icon">
                     <use xlink:href="{{ asset('admin/icons/sprites/free.svg#cil-home') }}"></use>
                 </svg>
@@ -130,7 +130,7 @@
             </a>
         </li>
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link @if(Request::segment(2) == 'reports') active @endif">
+            <a class="c-sidebar-nav-link @if(Request::segment(2) == 'driver') active @endif" href="{{ route('driver.index') }}">
                 <svg class="c-sidebar-nav-icon">
                     <use xlink:href="{{ asset('admin/icons/sprites/free.svg#cil-window-maximize') }}"></use>
                 </svg> Drayverlar
@@ -138,7 +138,7 @@
         </li>
 
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link @if(Request::segment(2) == 'reports') active @endif">
+            <a class="c-sidebar-nav-link @if(Request::segment(2) == 'service') active @endif" href="{{ route('service.index') }}">
                 <svg class="c-sidebar-nav-icon">
                     <use xlink:href="{{ asset('admin/icons/sprites/free.svg#cil-bar-chart') }}"></use>
                 </svg> Servislar
@@ -231,7 +231,7 @@
 
 <script src="{{ asset('admin/fancybox3.5/fancybox.min.js') }}"></script>
 
-<script src="{{ asset('admin/select2/js/select2.js') }}"></script>
+<script src="{{ asset('admin/select2/js/select2.min.js') }}"></script>
 {{-- number format --}}
 <script src="{{ asset('admin/js/numeral.js') }}"></script>
 <script src="{{ asset('admin/js/form-validation.js') }}"></script>

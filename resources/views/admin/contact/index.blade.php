@@ -15,7 +15,7 @@
                         <div class="d-flex justify-content-end position-relative">
                             <button class="btn btn-primary position-absolute" data-toggle="modal" data-target="#image_modal" >O'rniga Yuklash</button>
                         </div>
-                        <img src="{{ asset('/file_uploaded/contact/'. $contact->image) }}" class="w-100" alt="contact banner" />
+                        <img src="{{ asset('file_uploaded/contact/'. $contact->image) }}" class="w-100" alt="contact banner" />
                     </div>
                 </div>
                 <div class="col-md-6">

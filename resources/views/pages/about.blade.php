@@ -13,7 +13,7 @@
                     {!! $about->language[0]->description !!}
                 </div>
                 <div class="col-sm-12 col-lg-6 col-xl-6">
-                    <img src="{{ asset('/file_uploaded/about/'.$about->image) }}" alt="Image not found"
+                    <img src="{{ asset('file_uploaded/about/'.$about->image) }}" alt="Image not found"
                          class="img-thumbnail">
                 </div>
             </div>
@@ -24,7 +24,7 @@
                     @foreach($about->files as $file)
 
                         <div class="swiper-slide">
-                            <img class="rounded" src="{{ asset('/file_uploaded/about/'.$file->file) }}" alt="Image not found">
+                            <img class="rounded" src="{{ asset('file_uploaded/about/'.$file->file) }}" alt="Image not found">
                         </div>
 
                     @endforeach

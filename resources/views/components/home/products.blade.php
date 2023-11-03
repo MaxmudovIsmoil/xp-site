@@ -9,7 +9,7 @@
             <div class="col">
                 <a href="{{ route('product-detail', [$product->id] )}}">
                     <div class="card">
-                        <img src="{{ asset('/file_uploaded/product/' . $product->photo) }}" class="card-img-top" alt="Image not found">
+                        <img src="{{ asset('file_uploaded/product/' . $product->photo) }}" class="card-img-top" alt="Image not found">
                         <div class="card-body">
                             <p class="card-text text-center font-2xl">{{ $product->model }}</p>
                         </div>

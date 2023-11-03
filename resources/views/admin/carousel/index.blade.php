@@ -18,8 +18,8 @@
                 @foreach ($carousel as $c)
                     <div class="js_this_image_div carousel-one-div">
                         <span class="number-image">{{ $c->number }}</span>
-                        <a data-fancybox="gallery" href="{{ asset('/file_uploaded/carousel/'.$c->file) }}">
-                            <img src="{{ asset('/file_uploaded/carousel/'.$c->file) }}" class="file-image" alt="Image" />
+                        <a data-fancybox="gallery" href="{{ asset('file_uploaded/carousel/'.$c->file) }}">
+                            <img src="{{ asset('file_uploaded/carousel/'.$c->file) }}" class="file-image" alt="Image" />
                         </a>
 
                         <div class="d-none div-btns">

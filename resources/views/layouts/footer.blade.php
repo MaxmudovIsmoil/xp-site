@@ -4,12 +4,11 @@
             <div class="col-auto mb-3">
                 <h4>About us</h4>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a href="/">Products</a></li>
-                    <li class="mb-2"><a href="/">Service</a></li>
-                    <li class="mb-2"><a href="/">Application</a></li>
-                    <li class="mb-2"><a href="/">Download</a></li>
-                    <li class="mb-2"><a href="/">About us</a></li>
-                    <li class="mb-2"><a href="/">Contact us</a></li>
+                    <li class="mb-2"><a href="{{ route('product') }}">Products</a></li>
+                    <li class="mb-2"><a href="{{ route('news') }}">News</a></li>
+                    <li class="mb-2"><a href="{{ route('product') }}">Download</a></li>
+                    <li class="mb-2"><a href="{{ route('about') }}">About us</a></li>
+                    <li class="mb-2"><a href="{{ route('contact') }}">Contact us</a></li>
                 </ul>
             </div>
             <div class="col-auto mb-3">

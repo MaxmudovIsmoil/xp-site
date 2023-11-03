@@ -14,10 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('product_drivers', function (Blueprint $table) {
-            $table->id();
             $table->unsignedBigInteger('product_id')->nullable();
             $table->unsignedBigInteger('driver_id')->nullable();
-            $table->timestamps();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('restrict');
             $table->foreign('driver_id')->references('id')->on('drivers')->onDelete('restrict');
         });

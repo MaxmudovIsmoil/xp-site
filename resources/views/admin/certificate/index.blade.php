@@ -103,8 +103,8 @@
                     @foreach ($certificate->files as $file)
 
                     <div class="js_this_image_div certificate-one-div" >
-                        <a data-fancybox="gallery" href="{{ asset('/file_uploaded/certificate/'.$file->file) }}">
-                            <img src="{{ asset('/file_uploaded/certificate/'.$file->file) }}" class="file-image" alt="Image" />
+                        <a data-fancybox="gallery" href="{{ asset('file_uploaded/certificate/'.$file->file) }}">
+                            <img src="{{ asset('file_uploaded/certificate/'.$file->file) }}" class="file-image" alt="Image" />
                         </a>
                         <div class="file-name">
                             <p class="text-center mb-0 js_name_p">{{ $file->name }}</p>

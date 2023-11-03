@@ -21,8 +21,8 @@
 
             <div class="image-div">
 
-                <a data-fancybox="gallery" href="{{ asset('/file_uploaded/banner/' . $banner->file) }}">
-                    <img src="{{ asset('/file_uploaded/banner/' . $banner->file) }}" class="file-image" alt="Image" />
+                <a data-fancybox="gallery" href="{{ asset('file_uploaded/banner/' . $banner->file) }}">
+                    <img src="{{ asset('file_uploaded/banner/' . $banner->file) }}" class="file-image" alt="Image" />
                 </a>
                 <span class="text-danger">1920 x 460</span>
             </div>

@@ -4,13 +4,21 @@
    <section class="product-section">
     @include('components.global.banner')
         <div class="container mt-5xl">
-            @include('components.global.navlink')
+            <div class="d-flex justify-content-between mb-4 global-nav">
+                <div class="title">Category</div>
+                <div class="font-500 nav-url">
+                    <a href="/">Home</a>
+                    <i class="fa-solid fa-angle-right fz-12"></i>
+                    <a href="#">Product</a>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="lg-none col-xl-3 col-xxl-3 left">
                     <ul class="list-group">
                         @foreach($product_category as $pc)
-                            <li class="list-group-item @if($pc->id === $products[0]->category_id) active @endif">
-                                <a class="hover-list-item" href="{{ route('product', [$pc->id]) }}">{{ $pc->name_uz }}</a>
+                            <li class="list-group-item">
+                                <a class="hover-list-item @if($pc->id === $products[0]->category_id) active @endif" href="{{ route('product', [$pc->id]) }}">{{ $pc->name_uz }}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -29,21 +37,10 @@
                                 </a>
                             </div>
                         @endforeach
-{{--                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 mb-4">--}}
-{{--                            <a href="" class="card card-product-grid border-0">--}}
-{{--                                <div class="img-wrap">--}}
-{{--                                    <img src="{{ asset('client/img/products/2.jpg') }}" alt="2">--}}
-{{--                                </div>--}}
-{{--                                <figcaption class="card-product-info">--}}
-{{--                                    <p href="" class="title">2</p>--}}
-{{--                                </figcaption>--}}
-{{--                            </a>--}}
-{{--                        </div>--}}
 
-                            <div class="news-pagination-div global-pagination">
-                                {{ $products->links() }}
-                            </div>
-{{--                        @include('components.global.pagination')--}}
+                        <div class="news-pagination-div global-pagination">
+                            {{ $products->links() }}
+                        </div>
                     </div>
                 </div>
             </div>

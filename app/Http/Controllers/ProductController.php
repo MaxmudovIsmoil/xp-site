@@ -17,7 +17,7 @@ class ProductController extends Controller
         if ($category_id === null)
             $category_id = $product_category[0]->id;
 
-        $products = Product::where(['category_id' => $category_id])->paginate(3);
+        $products = Product::where(['category_id' => $category_id])->paginate(50);
 
         return view('pages.product', compact('product_category', 'products'));
     }

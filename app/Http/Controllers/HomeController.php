@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Certificate;
 use App\Models\News;
 use App\Models\Product;
+use App\Models\Service;
 use App\Traits\LocaleTrait;
 use Illuminate\Http\Request;
 use App\Models\NewTranslation;
@@ -43,9 +44,14 @@ class HomeController extends Controller
             ->orderBy('id', 'DESC')
             ->paginate(10);
 
+        $services = Service::with(['language' => function($query) use($locale) {
+                $query->where('locale', $locale);
+            }])
+            ->orderBy('id', 'DESC')
+            ->get();
 
         return view('pages.index',
-            compact('carousel', 'products', 'news', 'certificate')
+            compact('carousel', 'products', 'news', 'certificate', 'services')
         );
     }
 

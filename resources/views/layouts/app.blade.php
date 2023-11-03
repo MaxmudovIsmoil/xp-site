@@ -32,6 +32,7 @@
     <script src="{{ asset('client/packages/fancybox/jquery.fancybox.min.js') }}"></script>
     <script src="{{ asset('client/packages/hammer/hammer.min.js') }}"></script>
     <script src="{{ asset('client/packages/xzoom/xzoom.min.js') }}"></script>
+
     <script src="{{ asset('client/js/app.js') }}"></script>
 </body>
 </html>
