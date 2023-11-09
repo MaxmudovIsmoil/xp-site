@@ -13,34 +13,20 @@ class ProductSpecificationController extends Controller
     use HttpResponses;
     public function store(Request $request)
     {
-        try {
-            return response()->json(['res' => $request->all()]);
-//            return $this->success();
-        }
-        catch(\Exception $e)  {
-            return $this->error(error: $e->getMessage(), code: $e->getCode());
-        }
+        return response()->json(['res' => $request->all()]);
+//        return $this->response();
     }
 
 
     public function update(Request $request, int $id)
     {
-        try {
-            return response()->json(['res' => $request->all()]);
-//            return $this->success();
-        }
-        catch(\Exception $e)  {
-            return $this->error(error: $e->getMessage(), code: $e->getCode());
-        }
+        return response()->json(['res' => $request->all()]);
+//       return $this->response();
     }
 
     public function destroy(int $id): JsonResponse
     {
-        try {
-            return response()->json(['id' => $id]);
-        }
-        catch(\Exception $e) {
-            return $this->error($e->getMessage(), code: $e->getCode());
-        }
+        return response()->json(['id' => $id]);
+//            return $this->response();
     }
 }

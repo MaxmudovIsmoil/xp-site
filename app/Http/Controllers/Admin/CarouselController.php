@@ -27,56 +27,39 @@ class CarouselController extends Controller
 
     public function store(CarouselStoreRequest $request)
     {
-        try {
+        $file = $request->file('file');
+        $file_name = date('Y-m-d_H-i-s')."_".rand(1, 10).'.'.$file->getClientOriginalExtension();
+        $file->move(public_path().'/file_uploaded/carousel/', $file_name);
 
-            $file = $request->file('file');
-            $file_name = date('Y-m-d_H-i-s')."_".rand(1, 10).'.'.$file->getClientOriginalExtension();
-            $file->move(public_path().'/file_uploaded/carousel/', $file_name);
+        Carousel::create([
+            'number' => $request->number,
+            'file'   => $file_name,
+        ]);
 
-            Carousel::create([
-                'number' => $request->number,
-                'file'   => $file_name,
-            ]);
-
-            return $this->success();
-        }
-        catch(\Exception $e) {
-           return $this->error(error: $e->getMessage(), code: $e->getCode());
-        }
+        return $this->response();
     }
 
 
     public function update(CarouselUpdateRequest $request, int $id)
     {
-        try {
-            $c = Carousel::findOrFail($id);
-            $c->fill(['number' => $request->number]);
-            $c->save();
+        $c = Carousel::findOrFail($id);
+        $c->fill(['number' => $request->number]);
+        $c->save();
 
-            return $this->success();
-        }
-        catch(\Exception $e) {
-           return $this->error(error: $e->getMessage(), code: $e->getCode());
-        }
+        return $this->response();
     }
 
 
     public function destroy(int $id)
     {
-        try {
+        $c = Carousel::findOrFail($id);
 
-            $c = Carousel::findOrFail($id);
+        $file = public_path() . '/file_uploaded/carousel/' . $c->file;
+        if(file_exists($file))
+            unlink($file);
 
-            $file = public_path() . '/file_uploaded/carousel/' . $c->file;
-            if(file_exists($file))
-                unlink($file);
+        $c->delete();
 
-            $c->delete();
-
-            return $this->success(data: (object)['id' => $id]);
-        }
-        catch (\Exception $e) {
-           return $this->error(error: $e->getMessage(), code: $e->getCode());
-        }
+        return $this->response(data: (object)['id' => $id]);
     }
 }

@@ -10,6 +10,15 @@ use PhpParser\Node\Expr\Cast\Object_;
 
 trait HttpResponses {
 
+    protected function response(object $data = null): JsonResponse
+    {
+        try {
+            return $this->success(data: $data);
+        }
+        catch (\Exception $e) {
+            return $this->error($e->getMessage(), code: $e->getCode());
+        }
+    }
 
     protected function success(object $data = null, int $code = 200): JsonResponse
     {

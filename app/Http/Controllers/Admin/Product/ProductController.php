@@ -46,66 +46,60 @@ class ProductController extends Controller
 
     public function store(ProductStoreRequest $request)
     {
-        try {
-            $request->validated($request->all());
+        $request->validated($request->all());
 
-            $photo = $request->file('photo');
-            $photo_name = date('Y-m-d_H-i-s') . '.' . $photo->getClientOriginalExtension();
-            $photo->move(public_path() . '/file_uploaded/product/', $photo_name);
+        $photo = $request->file('photo');
+        $photo_name = date('Y-m-d_H-i-s') . '.' . $photo->getClientOriginalExtension();
+        $photo->move(public_path() . '/file_uploaded/product/', $photo_name);
 
-            $data = [
-                'model' => $request->model,
-                'category_id' => $request->category_id,
-                'photo' => $photo_name
-            ];
-            $data = isset($request->popular)
-                ? array_merge(['popular' => (int)$request->popular], $data)
-                : $data;
+        $data = [
+            'model' => $request->model,
+            'category_id' => $request->category_id,
+            'photo' => $photo_name
+        ];
+        $data = isset($request->popular)
+            ? array_merge(['popular' => (int)$request->popular], $data)
+            : $data;
 
-            if ($request->has('pdf')) {
-                $pdf = $request->file('pdf');
-                $pdf_name = date('Y-m-d_H-i-s') . '.' . $pdf->getClientOriginalExtension();
-                $pdf->move(public_path() . '/file_uploaded/product/', $pdf_name);
-                $data = array_merge(['pdf' => $pdf_name], $data);
+        if ($request->has('pdf')) {
+            $pdf = $request->file('pdf');
+            $pdf_name = date('Y-m-d_H-i-s') . '.' . $pdf->getClientOriginalExtension();
+            $pdf->move(public_path() . '/file_uploaded/product/', $pdf_name);
+            $data = array_merge(['pdf' => $pdf_name], $data);
+        }
+
+        $key_count = count($request->key_en);
+
+        DB::beginTransaction();
+            $product_id = Product::insertGetId($data);
+
+            for ($i = 0; $i < $key_count; $i++) {
+                $product_detail_id = ProductDetail::insertGetId(['product_id' => $product_id]);
+
+                ProductDetailTranslation::insert([
+                    [
+                        'product_detail_id' => $product_detail_id,
+                        'locale' => 'en',
+                        'key' => $request->key_en[$i],
+                        'value' => $request->value_en[$i],
+                    ],
+                    [
+                        'product_detail_id' => $product_detail_id,
+                        'locale' => 'ru',
+                        'key' => $request->key_ru[$i],
+                        'value' => $request->value_ru[$i],
+                    ],
+                    [
+                        'product_detail_id' => $product_detail_id,
+                        'locale' => 'uz',
+                        'key' => $request->key_uz[$i],
+                        'value' => $request->value_uz[$i],
+                    ],
+                ]);
             }
+        DB::commit();
 
-            $key_count = count($request->key_en);
-
-            DB::beginTransaction();
-                $product_id = Product::insertGetId($data);
-
-                for ($i = 0; $i < $key_count; $i++) {
-                    $product_detail_id = ProductDetail::insertGetId(['product_id' => $product_id]);
-
-                    ProductDetailTranslation::insert([
-                        [
-                            'product_detail_id' => $product_detail_id,
-                            'locale' => 'en',
-                            'key' => $request->key_en[$i],
-                            'value' => $request->value_en[$i],
-                        ],
-                        [
-                            'product_detail_id' => $product_detail_id,
-                            'locale' => 'ru',
-                            'key' => $request->key_ru[$i],
-                            'value' => $request->value_ru[$i],
-                        ],
-                        [
-                            'product_detail_id' => $product_detail_id,
-                            'locale' => 'uz',
-                            'key' => $request->key_uz[$i],
-                            'value' => $request->value_uz[$i],
-                        ],
-                    ]);
-                }
-            DB::commit();
-
-            return $this->success();
-        }
-        catch (\Exception $e) {
-            DB::rollBack();
-            return $this->error(error: $e->getMessage(), code: $e->getCode());
-        }
+        return $this->response();
     }
 
 
@@ -126,87 +120,76 @@ class ProductController extends Controller
 
     public function update(ProductUpdateRequest $request, int $id)
     {
-        try {
-            $request->validated($request->all());
+        $request->validated($request->all());
 
-            $popular = isset($request->popular) ? "1" : "0";
-            $data = [
-                'model' => $request->model,
-                'category_id' => $request->category_id,
-                'popular' => $popular,
-            ];
+        $popular = isset($request->popular) ? "1" : "0";
+        $data = [
+            'model' => $request->model,
+            'category_id' => $request->category_id,
+            'popular' => $popular,
+        ];
 
-            if ($request->hasFile('photo')) {
-                $photo = $request->file('photo');
-                $photo_name = date('Y-m-d_H-i-s') . '.' . $photo->getClientOriginalExtension();
-                $photo->move(public_path() . '/file_uploaded/product/', $photo_name);
-                $data = array_merge(['photo' => $photo_name], $data);
-            }
-
-            if ($request->hasFile('pdf')) {
-                $pdf = $request->file('pdf');
-                $pdf_name = date('Y-m-d_H-i-s') . '.' . $pdf->getClientOriginalExtension();
-                $pdf->move(public_path() . '/file_uploaded/product/', $pdf_name);
-                $data = array_merge(['pdf' => $pdf_name], $data);
-            }
-
-            DB::beginTransaction();
-                $product = Product::findOrFail($id);
-                $product->fill($data);
-                $product->save();
-
-                ProductDetail::where(['product_id' => $id])->delete();
-
-                $key_count = count($request->key_en);
-                for ($i = 0; $i < $key_count; $i++) {
-                    $product_detail_id = ProductDetail::insertGetId(['product_id' => $id]);
-
-                    ProductDetailTranslation::insert([
-                        [
-                            'product_detail_id' => $product_detail_id,
-                            'locale' => 'en',
-                            'key' => $request->key_en[$i],
-                            'value' => $request->value_en[$i],
-                        ],
-                        [
-                            'product_detail_id' => $product_detail_id,
-                            'locale' => 'ru',
-                            'key' => $request->key_ru[$i],
-                            'value' => $request->value_ru[$i],
-                        ],
-                        [
-                            'product_detail_id' => $product_detail_id,
-                            'locale' => 'uz',
-                            'key' => $request->key_uz[$i],
-                            'value' => $request->value_uz[$i],
-                        ],
-                    ]);
-                }
-            DB::commit();
-
-            return $this->success();
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photo_name = date('Y-m-d_H-i-s') . '.' . $photo->getClientOriginalExtension();
+            $photo->move(public_path() . '/file_uploaded/product/', $photo_name);
+            $data = array_merge(['photo' => $photo_name], $data);
         }
-        catch(\Exception $e) {
-            DB::rollBack();
-            return $this->error(error: $e->getMessage(), code: $e->getCode());
+
+        if ($request->hasFile('pdf')) {
+            $pdf = $request->file('pdf');
+            $pdf_name = date('Y-m-d_H-i-s') . '.' . $pdf->getClientOriginalExtension();
+            $pdf->move(public_path() . '/file_uploaded/product/', $pdf_name);
+            $data = array_merge(['pdf' => $pdf_name], $data);
         }
+
+        DB::beginTransaction();
+            $product = Product::findOrFail($id);
+            $product->fill($data);
+            $product->save();
+
+            ProductDetail::where(['product_id' => $id])->delete();
+
+            $key_count = count($request->key_en);
+            for ($i = 0; $i < $key_count; $i++) {
+                $product_detail_id = ProductDetail::insertGetId(['product_id' => $id]);
+
+                ProductDetailTranslation::insert([
+                    [
+                        'product_detail_id' => $product_detail_id,
+                        'locale' => 'en',
+                        'key' => $request->key_en[$i],
+                        'value' => $request->value_en[$i],
+                    ],
+                    [
+                        'product_detail_id' => $product_detail_id,
+                        'locale' => 'ru',
+                        'key' => $request->key_ru[$i],
+                        'value' => $request->value_ru[$i],
+                    ],
+                    [
+                        'product_detail_id' => $product_detail_id,
+                        'locale' => 'uz',
+                        'key' => $request->key_uz[$i],
+                        'value' => $request->value_uz[$i],
+                    ],
+                ]);
+            }
+        DB::commit();
+
+        return $this->response();
     }
 
 
     public function destroy(int $id)
     {
-        try {
-            ProductDetail::where(['product_id' => $id])->get();
-            ProductOverview::where(['product_id' => $id])->delete();
-            ProductPhoto::where(['product_id' => $id])->delete();
-            ProductSpecification::where(['product_id' => $id])->delete();
+        ProductDetail::where(['product_id' => $id])->get();
+        ProductOverview::where(['product_id' => $id])->delete();
+        ProductPhoto::where(['product_id' => $id])->delete();
+        ProductSpecification::where(['product_id' => $id])->delete();
 
-            Product::findOrFail($id)->delete();
+        Product::findOrFail($id)->delete();
 
-            return $this->success(data: (object)['id' => $id]);
-        }
-        catch(\Exception $e) {
-            return $this->error(error: $e->getMessage(), code: $e->getCode());
-        }
+        return $this->response(data: (object)['id' => $id]);
     }
 }

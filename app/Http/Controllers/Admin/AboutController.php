@@ -34,38 +34,30 @@ class AboutController extends Controller
     {
         $request->validated($request->all());
 
-        try {
-            // return response()->json(['res' => $request->all()]);
+        DB::beginTransaction();
+            AboutTranslation::where(['about_id' => $id])->delete();
 
-            DB::beginTransaction();
-                AboutTranslation::where(['about_id' => $id])->delete();
+            $datas = [
+                0 => [
+                    'about_id' => $id,
+                    'locale' => 'en',
+                    'description' => $request->description_en,
+                ],
+                1 => [
+                    'about_id' => $id,
+                    'locale' => 'ru',
+                    'description' => $request->description_ru,
+                ],
+                2 => [
+                    'about_id' => $id,
+                    'locale' => 'uz',
+                    'description' => $request->description_uz,
+                ]
+            ];
+            AboutTranslation::insert($datas);
+        DB::commit();
 
-                $datas = [
-                    0 => [
-                        'about_id' => $id,
-                        'locale' => 'en',
-                        'description' => $request->description_en,
-                    ],
-                    1 => [
-                        'about_id' => $id,
-                        'locale' => 'ru',
-                        'description' => $request->description_ru,
-                    ],
-                    2 => [
-                        'about_id' => $id,
-                        'locale' => 'uz',
-                        'description' => $request->description_uz,
-                    ]
-                ];
-                AboutTranslation::insert($datas);
-            DB::commit();
-
-            return $this->success();
-        }
-        catch (\Exception $e) {
-            DB::rollBack();
-            return $this->error(error: $e->getMessage(), code: $e->getCode());
-        }
+        return $this->response();
     }
 
 
@@ -99,51 +91,40 @@ class AboutController extends Controller
 
     public function file_delete($id)
     {
-        try {
+        $cf = AboutFile::findOrFail($id);
 
-            $cf = AboutFile::findOrFail($id);
+        $file = public_path().'/file_uploaded/about/'.$cf->file;
 
-            $file = public_path().'/file_uploaded/about/'.$cf->file;
+        if(file_exists($file))
+            unlink($file);
 
-            if(file_exists($file))
-                unlink($file);
+        $cf->delete();
 
-            $cf->delete();
-
-            return $this->success();
-        }
-        catch (\Exception $e) {
-            return $this->error(error: $e->getMessage(), code: $e->getCode());
-        }
+        return $this->response();
     }
 
 
     public function image_upload(Request $request)
     {
-        try {
-            if(!$request->hasfile('image'))
-                return $this->error('required');
 
-            $image = $request->file('image');
+        if(!$request->hasfile('image'))
+            return $this->error('required');
 
-            $image_name = date('Y-m-d_H-i-s')."_".rand(1, 10).'.'.$image->getClientOriginalExtension();
-            $image->move(public_path().'/file_uploaded/about/', $image_name);
+        $image = $request->file('image');
 
-
-            $old_image = public_path().'/file_uploaded/about/'.$request->old_image;
-            if(file_exists($old_image))
-                unlink($old_image);
+        $image_name = date('Y-m-d_H-i-s')."_".rand(1, 10).'.'.$image->getClientOriginalExtension();
+        $image->move(public_path().'/file_uploaded/about/', $image_name);
 
 
-            About::where(['id' => $request->id])
-                ->update(['image' => $image_name]);
+        $old_image = public_path().'/file_uploaded/about/'.$request->old_image;
+        if(file_exists($old_image))
+            unlink($old_image);
 
-            return $this->success();
 
-        }
-        catch(\Exception $e) {
-            return $this->error(error: $e->getMessage(), code: $e->getCode());
-        }
+        About::where(['id' => $request->id])
+            ->update(['image' => $image_name]);
+
+        return $this->response();
     }
 
 }

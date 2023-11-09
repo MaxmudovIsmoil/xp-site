@@ -23,14 +23,9 @@ class ProductCategoryController extends Controller
 
     public function getOne(int $id)
     {
-        try {
-            $product_category = ProductCategory::findOrFail($id);
+        $product_category = ProductCategory::findOrFail($id);
 
-            return $this->success(data: $product_category);
-        }
-        catch (\Exception $e) {
-            return $this->error(error: $e->getMessage(), code: $e->getCode());
-        }
+        return $this->response(data: $product_category);
     }
 
 
@@ -38,18 +33,13 @@ class ProductCategoryController extends Controller
     {
         $request->validated($request->all());
 
-        try {
-            ProductCategory::create([
-                'name_en' => $request->name_en,
-                'name_ru' => $request->name_ru,
-                'name_uz' => $request->name_uz,
-            ]);
+        ProductCategory::create([
+            'name_en' => $request->name_en,
+            'name_ru' => $request->name_ru,
+            'name_uz' => $request->name_uz,
+        ]);
 
-            return $this->success();
-        }
-        catch (\Exception $e) {
-            return $this->error(error: $e->getMessage(), code: $e->getCode());
-        }
+        return $this->response();
     }
 
 
@@ -57,34 +47,24 @@ class ProductCategoryController extends Controller
     {
         $request->validated($request->all());
 
-        try {
-            $product_category = ProductCategory::findOrFail($id);
-            $product_category->fill([
-                'name_en' => $request->name_en,
-                'name_ru' => $request->name_ru,
-                'name_uz' => $request->name_uz,
-            ]);
-            $product_category->save();
+        $product_category = ProductCategory::findOrFail($id);
+        $product_category->fill([
+            'name_en' => $request->name_en,
+            'name_ru' => $request->name_ru,
+            'name_uz' => $request->name_uz,
+        ]);
+        $product_category->save();
 
-            return $this->success();
-        }
-        catch (\Exception $e) {
-            return $this->error(error: $e->getMessage(), code: $e->getCode());
-        }
+        return $this->response();
     }
 
 
     public function destroy(int $id)
     {
-        try {
-            $pc = ProductCategory::findOrFail($id);
-            $pc->delete();
+        $pc = ProductCategory::findOrFail($id);
+        $pc->delete();
 
-            return $this->success(data: (object)['id' => $id]);
-        }
-        catch (\Exception $e) {
-            return $this->error(error: $e->getMessage(), code: $e->getCode());
-        }
+        return $this->response(data: (object)['id' => $id]);
     }
 
 }

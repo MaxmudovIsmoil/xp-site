@@ -84,6 +84,8 @@ return [
 
     'locale' => 'uz',
 
+    "locales" => ['uz', 'en', 'ru'],
+
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale

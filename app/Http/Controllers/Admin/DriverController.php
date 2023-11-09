@@ -33,88 +33,74 @@ class DriverController extends Controller
 
     public function getOne(int $id): JsonResponse
     {
-        try {
-            $driver = Driver::with('language')->findOrFail($id);
+        $driver = Driver::with('language')
+            ->findOrFail($id);
 
-            return $this->success(data: $driver);
-        }
-        catch (\Exception $e) {
-            return $this->error(error: $e->getMessage(), code: $e->getCode());
-        }
+        return $this->response(data: $driver);
     }
 
     public function store(DriverStoreRequest $request)
     {
         $request->validated($request->all());
 
-        try {
-            DB::beginTransaction();
+        DB::beginTransaction();
 
-            if(!$request->hasfile('file'))
-                return $this->error('required');
+        if(!$request->hasfile('file'))
+            return $this->error('required');
 
-            $file = $request->file('file');
-            $file_name = date('Y-m-d_H-i-s')."_".rand(1, 10).'.'.$file->getClientOriginalExtension();
-            $file->move(public_path().'/file_uploaded/driver/', $file_name);
+        $file = $request->file('file');
+        $file_name = date('Y-m-d_H-i-s')."_".rand(1, 10).'.'.$file->getClientOriginalExtension();
+        $file->move(public_path().'/file_uploaded/driver/', $file_name);
 
-            $driver_id = Driver::insertGetId([
-                'system' => $request->system,
-                'file' => $file_name,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
+        $driver_id = Driver::insertGetId([
+            'system' => $request->system,
+            'file' => $file_name,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        if ($request->product_id !== null) {
+            ProductDriver::create([
+                'product_id' => (int) $request->product_id,
+                'driver_id' => $driver_id
             ]);
-
-            if ($request->product_id !== null) {
-                ProductDriver::create([
-                    'product_id' => (int) $request->product_id,
-                    'driver_id' => $driver_id
-                ]);
-            }
-
-            $datas = [
-                0 => [
-                    'driver_id' => $driver_id,
-                    'locale' => 'en',
-                    'name' => $request->name_en,
-                    'description' => $request->description_en,
-                ],
-                1 => [
-                    'driver_id' => $driver_id,
-                    'locale' => 'ru',
-                    'name' => $request->name_ru,
-                    'description' => $request->description_ru,
-                ],
-                2 => [
-                    'driver_id' => $driver_id,
-                    'locale' => 'uz',
-                    'name' => $request->name_uz,
-                    'description' => $request->description_uz,
-                ]
-            ];
-            DriverTranslation::insert($datas);
-
-            DB::commit();
-
-            return $this->success();
         }
-        catch (\Exception $e) {
-            DB::rollBack();
-            return $this->error(error: $e->getMessage(), code: $e->getCode());
-        }
+
+        $datas = [
+            0 => [
+                'driver_id' => $driver_id,
+                'locale' => 'en',
+                'name' => $request->name_en,
+                'description' => $request->description_en,
+            ],
+            1 => [
+                'driver_id' => $driver_id,
+                'locale' => 'ru',
+                'name' => $request->name_ru,
+                'description' => $request->description_ru,
+            ],
+            2 => [
+                'driver_id' => $driver_id,
+                'locale' => 'uz',
+                'name' => $request->name_uz,
+                'description' => $request->description_uz,
+            ]
+        ];
+        DriverTranslation::insert($datas);
+
+        DB::commit();
+
+        return $this->response();
+
     }
 
 
     public function update(DriverUpdateRequest $request, int $id)
     {
-//        return response()->json([
-//            'res' => $request->all(),
-//            't' => (int) $request->product_id
-//        ]);
 
         $request->validated($request->all());
 
-        try {
-            DB::beginTransaction();
+        DB::beginTransaction();
             $update_data = [
                 'system' => $request->system,
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -172,37 +158,26 @@ class DriverController extends Controller
             ];
             DriverTranslation::insert($datas);
 
-            DB::commit();
+        DB::commit();
 
-            return $this->success();
-        }
-        catch (\Exception $e) {
-            DB::rollBack();
-            return $this->error(error: $e->getMessage(), code: $e->getCode());
-        }
+        return $this->response();
     }
 
 
 
     public function destroy(int $id)
     {
-        try {
+        DriverTranslation::where(['driver_id' => $id])->delete();
 
-            DriverTranslation::where(['driver_id' => $id])->delete();
+        $d = Driver::findOrFail($id);
 
-            $d = Driver::findOrFail($id);
+        $file = public_path().'/file_uploaded/new/'.$d->file;
+        if(file_exists($file))
+            unlink($file);
 
-            $file = public_path().'/file_uploaded/new/'.$d->file;
-            if(file_exists($file))
-                unlink($file);
+        $d->delete();
 
-            $d->delete();
-
-            return $this->success(data: (object)['id' => $id]);
-        }
-        catch (\Exception $e) {
-            return $this->error(error: $e->getMessage(), code: $e->getCode());
-        }
+        return $this->response(data: (object)['id' => $id]);
     }
 
 

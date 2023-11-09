@@ -18,7 +18,6 @@ class DriverController extends Controller
             $query->where('locale', '=', $locale);
         }])->get();
 
-//        dd($drivers);
 
         return view('pages.drivers',
             compact('drivers')

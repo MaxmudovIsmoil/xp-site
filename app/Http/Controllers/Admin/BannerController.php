@@ -24,33 +24,24 @@ class BannerController extends Controller
 
     public function update(Request $request)
     {
-        try {
-            if(!$request->file('file'))
-                return $this->error(error: 'required');
+        if(!$request->file('file'))
+            return $this->error(error: 'required');
+
+        $file = $request->file('file');
+        $file_name = date('Y-m-d_H-i-s')."_".rand(1, 10).'.'.$file->getClientOriginalExtension();
+        $file->move(public_path().'/file_uploaded/banner/', $file_name);
 
 
-            $file = $request->file('file');
-            $file_name = date('Y-m-d_H-i-s')."_".rand(1, 10).'.'.$file->getClientOriginalExtension();
-            $file->move(public_path().'/file_uploaded/banner/', $file_name);
+        $banner = Banner::findOrFail(1);
 
+        $file = public_path().'/file_uploaded/banner/'.$banner->file;
+        if(file_exists($file))
+            unlink($file);
 
-            $banner = Banner::findOrFail(1);
+        $banner->fill(['file' => $file_name]);
+        $banner->save();
 
-            $file = public_path().'/file_uploaded/banner/'.$banner->file;
-            if(file_exists($file))
-                unlink($file);
-
-
-            $banner->fill(['file' => $file_name]);
-            $banner->save();
-
-            return $this->success();
-
-        }
-        catch(\Exception $e) {
-            return $this->error(error: $e->getMessage(), code: $e->getCode());
-        }
-
+        return $this->response();
     }
 
 

@@ -17,10 +17,10 @@
             <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link @if (Request::segment(1) === null || Request::segment(1) === 'index') active @endif" aria-current="page"
-                        href="{{ route('index') }}">Home</a>
+                        href="{{ route('index') }}">{{ __('Bosh sahifa') }}</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link @if (Request::segment(1) === 'product' || Request::segment(1) === 'product-detail') active @endif" href="{{ route('product') }}">Products</a>
+                    <a class="nav-link @if (Request::segment(1) === 'product' || Request::segment(1) === 'product-detail') active @endif" href="{{ route('product') }}">{{ __('Maxsulotlar') }}</a>
 
 {{--                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside">Products</a>--}}
 {{--                    <ul class="dropdown-menu">--}}
@@ -30,8 +30,6 @@
 {{--                                data-bs-auto-close="outside">Receipt Printer</a>--}}
 {{--                            <ul class="dropdown-menu">--}}
 {{--                                <li><a class="dropdown-item" href="">80mm Series</a></li>--}}
-{{--                                <li><a class="dropdown-item" href="">58mm Series</a></li>--}}
-{{--                                <li><a class="dropdown-item" href="">76mm Series</a></li>--}}
 {{--                            </ul>--}}
 {{--                        </li>--}}
 {{--                        <li class="dropend">--}}
@@ -39,31 +37,27 @@
 {{--                                data-bs-auto-close="outside">Label Printer</a>--}}
 {{--                            <ul class="dropdown-menu dropdown-submenu">--}}
 {{--                                <li><a class="dropdown-item" href=""> Third level 1</a></li>--}}
-{{--                                <li><a class="dropdown-item" href=""> Third level 2</a></li>--}}
-{{--                                <li><a class="dropdown-item" href=""> Third level 3</a></li>--}}
-{{--                                <li><a class="dropdown-item" href=""> Third level 4</a></li>--}}
 {{--                            </ul>--}}
 {{--                        </li>--}}
 {{--                        <li><a class="dropdown-item" href="#">Mobile Printer</a></li>--}}
-{{--                        <li><a class="dropdown-item" href="#">Other Printer</a></li>--}}
 {{--                    </ul>--}}
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if (Request::segment(1) == 'news' || Request::segment(1) == 'new') active @endif"
-                        href="{{ route('news') }}">News</a>
+                        href="{{ route('news') }}">{{ __('Yangiliklar') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @if(Request::segment(1) == 'about') active @endif" href="{{ route('about') }}">About</a>
+                    <a class="nav-link @if(Request::segment(1) == 'about') active @endif" href="{{ route('about') }}">{{ __('Biz haqimizda') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @if(Request::segment(1) == 'contact') active @endif" href="{{ route('contact') }}">Contact</a>
+                    <a class="nav-link @if(Request::segment(1) == 'contact') active @endif" href="{{ route('contact') }}">{{ __("Biz bilan bog'lanish") }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @if(Request::segment(1) == 'drivers') active @endif" href="{{ route('driver') }}">Drivers</a>
+                    <a class="nav-link @if(Request::segment(1) == 'drivers') active @endif" href="{{ route('driver') }}">{{ __('Drayverlar') }}</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
-                        data-bs-auto-close="outside"><i class="fa-regular fa-globe"></i> Lang</a>
+                        data-bs-auto-close="outside"><i class="fa-regular fa-globe"></i> {{__('Til') }}</a>
                     <ul class="dropdown-menu flags">
                         <li><a href="{{ route('locale', ['uz']) }}" class="dropdown-item @if(session('locale') === 'uz') active @endif">
                                 <img src="{{ asset('client/img/flags/uz.png') }}" alt="uz"/> UZ</a>
