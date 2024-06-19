@@ -36,8 +36,6 @@ class ServiceController extends Controller
 
     public function store(ServiceRequest $request)
     {
-        $request->validated($request->all());
-
         DB::beginTransaction();
 
             $service_id = Service::insertGetId([
@@ -76,8 +74,6 @@ class ServiceController extends Controller
 
     public function update(ServiceRequest $request, int $id)
     {
-        $request->validated($request->all());
-
         DB::beginTransaction();
 
             $service = Service::findOrFail($id);

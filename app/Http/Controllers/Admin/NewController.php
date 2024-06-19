@@ -35,8 +35,6 @@ class NewController extends Controller
 
     public function store(NewRequest $request)
     {
-        $request->validated($request->all());
-
         DB::beginTransaction();
 
             if(!$request->hasfile('file'))
@@ -83,8 +81,6 @@ class NewController extends Controller
 
     public function update(NewRequest $request, int $id)
     {
-        $request->validated($request->all());
-
         DB::beginTransaction();
             $update_data = [
                 'date' => date('Y-m-d', strtotime($request->date)),

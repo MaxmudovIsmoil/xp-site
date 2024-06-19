@@ -41,8 +41,6 @@ class DriverController extends Controller
 
     public function store(DriverStoreRequest $request)
     {
-        $request->validated($request->all());
-
         DB::beginTransaction();
 
         if(!$request->hasfile('file'))
@@ -97,9 +95,6 @@ class DriverController extends Controller
 
     public function update(DriverUpdateRequest $request, int $id)
     {
-
-        $request->validated($request->all());
-
         DB::beginTransaction();
             $update_data = [
                 'system' => $request->system,

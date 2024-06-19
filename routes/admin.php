@@ -109,7 +109,7 @@ Route::group(['prefix'  => 'product'], function() {
 
     // Specification
     Route::group(['prefix'  => 'specification'], function() {
-        Route::post('/store', [ProductSpecificationController::class, 'store'])->name('product_specification.store');
+        Route::post('/store/{product_id}', [ProductSpecificationController::class, 'store'])->name('product_specification.store');
         Route::post('/update/{id}', [ProductSpecificationController::class, 'update'])->name('product_specification.update');
         Route::delete('/delete/{id}', [ProductSpecificationController::class, 'destroy'])->name('product_specification.destroy');
     });
