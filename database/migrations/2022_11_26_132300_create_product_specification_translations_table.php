@@ -21,7 +21,10 @@ return new class extends Migration
             $table->longText('value1')->default('');
             $table->longText('value2')->default('');
 //            $table->unique(['product_specification_id', 'locale']);
-//            $table->foreign('product_specification_id')->references('id')->on('product_specifications')->onDelete('cascade');
+            $table->foreign('product_specification_id', 'p_spec_id_foreign')
+            ->references('id')
+                ->on('product_specifications')
+                ->onDelete('cascade');
         });
     }
 

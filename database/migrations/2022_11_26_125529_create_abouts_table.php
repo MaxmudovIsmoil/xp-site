@@ -20,11 +20,7 @@ return new class extends Migration
             $table->softDeletes();
         });
 
-        DB::table('abouts')->insert([
-            'image' => 'about.jpg',
-            'created_at'=> now(),
-            'updated_at'=> now(),
-        ]);
+
     }
 
     /**

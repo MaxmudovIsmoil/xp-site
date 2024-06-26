@@ -18,7 +18,10 @@ return new class extends Migration
             $table->unsignedBigInteger('certificate_id')->nullable();
             $table->string('file');
             $table->string('name')->default('');
-            $table->foreign('certificate_id')->references('id')->on('certificates')->onDelete('cascade');
+            $table->foreign('certificate_id')
+                ->references('id')
+                ->on('certificates')
+                ->onDelete('cascade');
         });
     }
 

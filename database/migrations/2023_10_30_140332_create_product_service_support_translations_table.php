@@ -14,14 +14,18 @@ return new class extends Migration
     public function up()
     {
         Schema::create('product_service_support_translations', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('product_service_support_id')->unsigned();
+            $table->id();
+            $table->unsignedBigInteger('product_service_support_id')->nullable();
             $table->string('locale')->index();
             $table->string('name');
             $table->longText('description');
-            $table->unique(['product_service_support_id', 'locale']);
-            $table->foreign('product_service_support_id')->references('id')->on('product_service_supports')->onDelete('cascade');
+//            $table->unique(['product_service_support_id', 'locale']);
+            $table->foreign('product_service_support_id', 'pss_trans_pss_id_foreign')
+                ->references('id')
+                ->on('product_service_supports')
+                ->onDelete('cascade');
         });
+
     }
 
     /**

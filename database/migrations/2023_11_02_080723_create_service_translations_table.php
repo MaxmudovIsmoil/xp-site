@@ -15,12 +15,14 @@ return new class extends Migration
     {
         Schema::create('service_translations', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('service_id')->unsigned();
+            $table->unsignedBigInteger('service_id');
             $table->string('locale');
             $table->string('name');
             $table->string('description');
             $table->unique(['service_id', 'locale']);
-            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
+            $table->foreign('service_id')->references('id')
+                ->on('services')
+                ->onDelete('cascade');
         });
     }
 

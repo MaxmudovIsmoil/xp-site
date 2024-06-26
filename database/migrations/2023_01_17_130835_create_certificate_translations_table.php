@@ -15,12 +15,15 @@ return new class extends Migration
     {
         Schema::create('certificate_translations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('certificate_id')->unsigned();
+            $table->unsignedBigInteger('certificate_id');
             $table->string('locale')->index();
             $table->string('name');
             $table->longText('description');
             $table->unique(['certificate_id', 'locale']);
-            $table->foreign('certificate_id')->references('id')->on('certificates')->onDelete('cascade');
+            $table->foreign('certificate_id')
+                ->references('id')
+                ->on('certificates')
+                ->onDelete('cascade');
         });
     }
 

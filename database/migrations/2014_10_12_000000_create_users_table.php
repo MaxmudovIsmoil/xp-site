@@ -26,15 +26,6 @@ return new class extends Migration
         });
 
 
-        DB::table('users')->insert([
-            'name' => 'Administration',
-            'username'  => 'admin',
-            'password'  => \Illuminate\Support\Facades\Hash::make('admin123'),
-            'email'     => 'admin@gmail.com',
-            'created_at'=> now(),
-            'updated_at'=> now(),
-        ]);
-
     }
 
     /**
