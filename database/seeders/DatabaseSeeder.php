@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\About;
 use App\Models\Banner;
+use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -43,6 +44,14 @@ class DatabaseSeeder extends Seeder
             'file' => 'banner.jpg',
             'created_at'=> now(),
             'updated_at'=> now(),
+        ]);
+
+        Contact::create([
+            'phone' => '901234567',
+            'email' => 'Admin@gamil.com',
+            'url' => 'url',
+            'image' => 'image',
+            'location' => 'manzil',
         ]);
     }
 }

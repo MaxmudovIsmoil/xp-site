@@ -9,15 +9,20 @@ class Helper
 {
     public static function banner_image(): string
     {
-        $banner = Banner::select('file')->first();
-
-        return $banner->file;
+        if (Banner::exists()) {
+            $banner = Banner::select('file')->first();
+            return $banner->file;
+        }
+        return '';
     }
 
     public static function contact_phone(): string
     {
-        $phone = Contact::first()->phone;
-        return self::phone_number_format($phone);
+        if (Contact::exists()) {
+            $phone = Contact::first()->phone;
+            return self::phone_number_format($phone);
+        }
+        return '';
     }
     public static function phone_number_format(string $phone): string
     {

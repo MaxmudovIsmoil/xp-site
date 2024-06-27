@@ -15,11 +15,14 @@ class ProductController extends Controller
         $product_category = ProductCategory::get();
 
         if ($category_id === null)
-            $category_id = $product_category[0]->id;
+            $category_id = isset($product_category[0]) ? $product_category[0]->id : null;
 
-        $products = Product::where(['category_id' => $category_id])->paginate(50);
+        $products = Product::where('category_id', $category_id)->paginate(50);
 
-        return view('pages.product', compact('product_category', 'products'));
+
+        return view('pages.product',
+            compact('product_category', 'products')
+        );
     }
 
 

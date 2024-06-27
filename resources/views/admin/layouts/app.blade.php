@@ -63,6 +63,14 @@
         </li>
 
         <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link @if(Request::segment(2) == 'carousel') active @endif" href="{{ route('carousel.index') }}">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="{{ asset('admin/icons/sprites/free.svg#cil-layers') }}"></use>
+                </svg> Carousel
+            </a>
+        </li>
+
+        <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link @if(Request::segment(2) == 'banner') active @endif" href="{{ route('banner') }}">
                 <svg class="c-sidebar-nav-icon">
                     <use xlink:href="{{ asset('admin/icons/sprites/free.svg#cil-user') }}"></use>
@@ -112,14 +120,6 @@
                 <svg class="c-sidebar-nav-icon">
                     <use xlink:href="{{ asset('admin/icons/sprites/free.svg#cil-font') }}"></use>
                 </svg> About
-            </a>
-        </li>
-
-        <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link @if(Request::segment(2) == 'carousel') active @endif" href="{{ route('carousel.index') }}">
-                <svg class="c-sidebar-nav-icon">
-                    <use xlink:href="{{ asset('admin/icons/sprites/free.svg#cil-layers') }}"></use>
-                </svg> Carousel
             </a>
         </li>
 

@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('contact.update', [$contact->id]) }}" method="POST" class="js_edit_form" enctype="multipart/form-data">
+            <form action="@isset($contact->id){{ route('contact.update', [$contact->id]) }}@endisset" method="POST" class="js_edit_form" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
@@ -21,7 +21,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="email">Phone</label>
+                                <label for="email">Email</label>
                                 <input type="email" name="email" class="form-control js_email" id="email"/>
                                 <div class="invalid-feedback">{{ "The email field is required." }}</div>
                             </div>

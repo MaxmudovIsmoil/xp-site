@@ -2,7 +2,7 @@
 @section('title', 'Xprinter - Contact')
 @section('content')
     <section class="contact-section">
-        @if($contact->image != '')
+        @if(isset($contact->image) && $contact->image != '')
             <div>
                 <img class="img-fluid" src="{{ asset('file_uploaded/contact/' . $contact->image) }}">
             </div>
@@ -33,7 +33,7 @@
                                     <span>
                                         <i class="fa-solid fa-envelope"></i>
                                     </span>
-                                    {{ $contact->email }}
+                                    @isset($contact->email) {{ $contact->email }} @endisset
                                 </a>
                             </div>
                             <div class="mb-2">
@@ -41,7 +41,9 @@
                                     <span>
                                         <i class="fa-solid fa-location-dot"></i>
                                     </span>
-                                    {{ $contact->language[0]->address }}
+                                    @isset($contact->language[0]->address)
+                                        {{ $contact->language[0]->address }}
+                                    @endisset
                                 </a>
                             </div>
                             @if(env('TELEGRAM_LINK') != '')

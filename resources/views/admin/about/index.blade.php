@@ -23,13 +23,17 @@
         <div class="card-body p-0 pt-1">
 
             <span>En:</span>
-            @isset($about->language)
+            @isset($about->language[0]->locale)
                 @if($about->language[0]->locale == 'en')
-                    <div class="js_description_en_html js_html mb-0">{!! $about->language[0]->description !!}</div>
+                    <div class="js_description_en_html js_html mb-0">
+                        @isset($about->language[0]->description)
+                            {!! $about->language[0]->description !!}
+                        @endisset
+                    </div>
                 @endif
             @endisset
                 <div class="d-none js_div_form mt-0">
-                    <textarea name="description_en" class="form-control js_description_en js_text_editer" rows="8">@if(isset($about->language[0]) && $about->language[0]->locale == 'en'){{ $about->language[0]->description }}@endif</textarea>
+                    <textarea name="description_en" class="form-control js_description_en js_text_editer" rows="8">@if(isset($about->language[0]->locale) && $about->language[0]->locale == 'en'){{ $about->language[0]->description }}@endif</textarea>
                     <div class="invalid-feedback mb-1">{{ "The description en field is required." }}</div>
                 </div>
 
@@ -38,25 +42,37 @@
             <span>Ru:</span>
             @isset($about->language[1])
                 @if($about->language[1]->locale == 'ru')
-                    <div class="js_description_ru_html js_html mt-1 mb-0">{!! $about->language[1]->description !!}</div>
+                    <div class="js_description_ru_html js_html mt-1 mb-0">
+                        @isset($about->language[1]->description)
+                            {!! $about->language[1]->description !!}
+                        @endisset
+                    </div>
                 @endif
             @endisset
 
             <div class="d-none js_div_form mt-0">
-                <textarea name="description_ru" class="form-control js_description_ru js_text_editer" rows="8">@if(isset($about->language[1]) && $about->language[1]->locale == 'ru'){{ $about->language[1]->description }}@endif</textarea>
+                <textarea name="description_ru" class="form-control js_description_ru js_text_editer" rows="8">
+                    @if(isset($about->language[1]) && $about->language[1]->locale == 'ru'){{ $about->language[1]->description }}@endif
+                </textarea>
                 <div class="invalid-feedback mb-1">{{ "The description ru field is required." }}</div>
             </div>
             <hr>
 
             <span>Uz:</span>
-            @isset($about->language[2])
+            @isset($about->language[2]->locale)
                 @if($about->language[2]->locale == 'uz')
-                    <div class="js_description_uz_html js_html mt-1 mb-0">{!! $about->language[2]->description !!}</div>
+                    <div class="js_description_uz_html js_html mt-1 mb-0">
+                        @isset($about->language[2]->description)
+                            {!! $about->language[2]->description !!}
+                        @endisset
+                    </div>
                 @endif
             @endisset
 
             <div class="d-none js_div_form mt-0">
-                <textarea name="description_uz" class="form-control js_description_uz js_text_editer" rows="8">@if(isset($about->language[2]) && $about->language[2]->locale == 'uz'){{ $about->language[2]->description }}@endif</textarea>
+                <textarea name="description_uz" class="form-control js_description_uz js_text_editer" rows="8">
+                    @if(isset($about->language[2]) && $about->language[2]->locale == 'uz'){{ $about->language[2]->description }}@endif
+                </textarea>
                 <div class="invalid-feedback mb-1">{{ "The description uz field is required." }}</div>
             </div>
 
@@ -66,7 +82,9 @@
                 <div class="d-flex justify-content-end position-relative">
                     <button class="btn btn-primary position-absolute" data-toggle="modal" data-target="#image_modal" >O'rniga Yuklash</button>
                 </div>
+                @isset($about->image)
                 <img src="{{ asset('file_uploaded/about/'.$about->image) }}" alt="about banner" />
+                @endisset
             </div>
 
             <hr class="last-hr">

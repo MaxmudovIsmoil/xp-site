@@ -18,7 +18,7 @@
                     <ul class="list-group">
                         @foreach($product_category as $pc)
                             <li class="list-group-item">
-                                <a class="hover-list-item @if($pc->id === $products[0]->category_id) active @endif" href="{{ route('product', [$pc->id]) }}">{{ $pc->name_uz }}</a>
+                                <a class="hover-list-item @if(isset($products[0]) && $products[0]->category_id === $pc->id) active @endif" href="{{ route('product', [$pc->id]) }}">{{ $pc->name_uz }}</a>
                             </li>
                         @endforeach
                     </ul>

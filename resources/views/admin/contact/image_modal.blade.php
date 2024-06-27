@@ -7,11 +7,11 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('contact.file_upload', [$contact->id]) }}" method="POST" class="js_image_form" enctype="multipart/form-data">
+            <form action="@isset($contact->id){{ route('contact.file_upload', [$contact->id]) }}@endisset" method="POST" class="js_image_form" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <input type="hidden" name="id" value="{{ $contact->id }}" />
-                <input type="hidden" name="old_image" value="{{ $contact->image }}" />
+                <input type="hidden" name="id" value="@isset($contact->id){{ $contact->id }}@endisset" />
+                <input type="hidden" name="old_image" value="@isset($contact->image){{ $contact->image }}@endisset" />
                 <div class="modal-body">
 
                     <div class="form-group">

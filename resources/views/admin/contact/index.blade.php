@@ -15,42 +15,56 @@
                         <div class="d-flex justify-content-end position-relative">
                             <button class="btn btn-primary position-absolute" data-toggle="modal" data-target="#image_modal" >O'rniga Yuklash</button>
                         </div>
+                        @isset($contact->image)
                         <img src="{{ asset('file_uploaded/contact/'. $contact->image) }}" class="w-100" alt="contact banner" />
+                        @endisset
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <h4>Phone: <span class="js_phone">{{ Helper::phone_number_format($contact->phone) }}</span></h4>
+                    <h4>Phone: <span class="js_phone">@isset($contact->phone){{ Helper::phone_number_format($contact->phone) }}@endisset</span></h4>
                 </div>
                 <div class="col-md-6">
-                    <h4>Email: <span class="js_email">{{ $contact->email }}</span></h4>
+                    <h4>Email: <span class="js_email">@isset($contact->email){{ $contact->email }}@endisset</span></h4>
                 </div>
             </div>
 
             <span>En:</span>
-            @isset($contact->language[0])
+            @isset($contact->language[0]->locale)
                 @if($contact->language[0]->locale == 'en')
-                    <div class="js_address_en_html js_html mb-0">{!! $contact->language[0]->address !!}</div>
+                    <div class="js_address_en_html js_html mb-0">
+                        @isset($contact->language[0]->address)
+                            {!! $contact->language[0]->address !!}
+                        @endisset
+                    </div>
                 @endif
             @endisset
             <hr class="last-hr mt-2 mb-2">
 
             <span>Ru:</span>
-            @isset($contact->language[1])
+            @isset($contact->language[1]->locale)
                 @if($contact->language[1]->locale == 'ru')
-                    <div class="js_address_ru_html js_html mt-1 mb-0">{!! $contact->language[1]->address !!}</div>
+                    <div class="js_address_ru_html js_html mt-1 mb-0">
+                        @isset($contact->language[1]->address)
+                            {!! $contact->language[1]->address !!}
+                        @endisset
+                    </div>
                 @endif
             @endisset
             <hr class="last-hr mt-2 mb-2">
 
             <span>Uz:</span>
-            @isset($contact->language[2])
+            @isset($contact->language[2]->locale)
                 @if($contact->language[2]->locale == 'uz')
-                    <div class="js_address_uz_html js_html mt-1 mb-0">{!! $contact->language[2]->address !!}</div>
+                    <div class="js_address_uz_html js_html mt-1 mb-0">
+                        @isset($contact->language[2]->address)
+                            {!! $contact->language[2]->address !!}
+                        @endisset
+                    </div>
                 @endif
             @endisset
 
             <hr class="last-hr mt-2 mb-2">
-            <button class="btn btn-primary js_edit_btn" data-url="{{ route('contact.getOne') }}" data-id="{{ $contact->id }}">Edit</button>
+            <button class="btn btn-primary js_edit_btn" data-url="{{ route('contact.getOne') }}" data-id="@isset($contact->id){{ $contact->id  }}@endisset">Edit</button>
         </div>
     </div>
 
