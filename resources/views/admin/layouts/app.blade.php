@@ -49,8 +49,8 @@
 <body class="c-app">
 <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
     <div class="c-sidebar-brand d-lg-down-none">
-        <h3 class="h4">AiSoft</h3>
-{{--        <img src="{{ asset('admin/images/hikvision_logo.png') }}" class="w-100" alt="Hikvision"/>--}}
+{{--        <h3 class="h4">AiSoft</h3>--}}
+        <img src="{{ asset('admin/images/adminLogo.png') }}" class="w-100" alt="Hikvision"/>
     </div>
     <ul class="c-sidebar-nav ps ps--active-y">
         <li class="c-sidebar-nav-item">
